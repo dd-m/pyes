@@ -45,6 +45,7 @@ class ElasticSearchModel(DotDict):
         else:
             print "ElasticSearchModel init: false"
             self.update(dict(*args, **kwargs))
+        print "initialized: " + str(self)
 
     def __setattr__(self, key, value):
         if not self.__dict__.has_key(
