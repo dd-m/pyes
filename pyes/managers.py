@@ -52,14 +52,16 @@ class Indices(object):
         """
         # body = {'actions': [{command: dict(index=index, alias=alias, **params)}
         #                     for (command, index, alias, params) in commands]}
-        body = {}
+        comms = {}
         for args in commands:
             params = {}
             if len(args) == 3:
                 command, index, alias = args
             elif len(args) == 4:
                 command, index, alias, params = args
-            body['actions'][command] = dict(index=index, alias=alias, **params)
+            comms[command] = dict(index=index, alias=alias, **params)
+
+        body = {'actions': comms}
         return self.conn._send_request('POST', "_aliases", body)
 
     def _get_alias_params(self, **kwargs):
