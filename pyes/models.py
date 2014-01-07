@@ -37,6 +37,7 @@ class ElasticSearchModel(DotDict):
         if len(args) == 2 and isinstance(args[0], ES):
             print "ElasticSearchModel init: true"
             item = args[1]
+            print "item: " + str(item)
             self.update(item.pop("_source", DotDict()))
             self.update(item.pop("fields", {}))
             self._meta = DotDict([(k.lstrip("_"), v) for k, v in item.items()])
