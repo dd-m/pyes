@@ -54,7 +54,7 @@ class Indices(object):
         #                     for (command, index, alias, params) in commands]}
         body = {}
         for args in commands:
-            command = index = alias = params = None
+            params = {}
             if len(args) == 3:
                 command, index, alias = args
             elif len(args) == 4:
