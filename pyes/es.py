@@ -1264,7 +1264,7 @@ class ResultSet(object):
     def facets(self):
         if self._results is None:
             self._do_search()
-            self.fix_keys()
+            # self.fix_keys()
         return self._facets
 
     def fix_facets(self):
