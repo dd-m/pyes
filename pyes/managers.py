@@ -440,19 +440,21 @@ class Indices(object):
         else:
             indices = self.conn._validate_indices(indices)
             if doc_type:
-                path = make_path(','.join(indices), doc_type, "_mapping")
+                path = make_path(','.join(indices), "_mapping", doc_type)
                 is_mapping = True
             else:
                 path = make_path(','.join(indices), "_mapping")
                 is_mapping = False
+        
         result = self.conn._send_request('GET', path)
+        
         if raw:
             return result
+
         from pyes.mappings import Mapper
         mapper = Mapper(result, is_mapping=is_mapping, connection=self.conn,
                         document_object_field=self.conn.document_object_field)
-        if doc_type:
-            return mapper.mappings[doc_type]
+
         return mapper
 
     def delete_mapping(self, index, doc_type):
